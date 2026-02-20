@@ -1,0 +1,20 @@
+# Environments
+.venv/
+env/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Data files (Don't commit the NFL data)
+*.parquet
+*.csv
+*.json
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Optional: Python version manager
+.python-version
