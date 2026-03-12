@@ -1,6 +1,6 @@
 # :football: NFL Predictor
 
-A data-driven, effective-tey-simple NFL matchup predictor built with Python and Polars. This project leverages
+A data-driven, effective-yet-simple NFL matchup predictor built with Python and Polars. This project leverages
 10 seasons of historical NFL data (2015–2024) to calculate performance-based spreads and predict game outcomes
 
 # :rocket: Tech Stack 
@@ -34,3 +34,4 @@ Run the predictor:
 - [ ] Phase 3: Environmental Variables (Integrating weather, wind, and surface data).
 - [ ] Phase 4: Advanced Weighting (Rolling means and strength of schedule).
 - [ ] Phase 5: Interactive UI (Streamlit web dashboard).
+
