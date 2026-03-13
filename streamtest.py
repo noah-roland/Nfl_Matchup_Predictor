@@ -25,20 +25,57 @@ st.title("🏈 NFL Matchup Predictor")
 st.subheader("Select Teams")
 col1, col2 = st.columns(2)
 
-# Get sorted list of abbreviations for the dropdowns
+# Get sorted list of abbreviations for the dropdowns!
 team_list = sorted(teams['team_abbr'].to_list())
 
 with col1:
     home_team = st.selectbox("Home Team", team_list, index=team_list.index(
-        'DAL') if 'DAL' in team_list else 0)
+        'MIA') if 'MIA' in team_list else 0)
 
 with col2:
     away_team = st.selectbox("Away Team", team_list, index=team_list.index(
-        'PHI') if 'PHI' in team_list else 1)
+        'NE') if 'NE' in team_list else 1)
 
-# 4. Display Selected Data (Proof of Concept)
 st.divider()
-st.write(f"Predicting matchup: **{away_team}** @ **{home_team}**")
+
+# Calculates the mean score for a given team when the specified score column is not null
+
+
+def calc_home_mean(team: str, score_col: str) -> float:
+    mean_score = schedules.filter(pl.col(score_col).is_not_null() & (
+        pl.col("home_team") == team)).select(pl.col(score_col).mean().round(1))
+    return mean_score.item()
+
+
+def calc_away_mean(team: str, score_col: str) -> float:
+    mean_score = schedules.filter(pl.col(score_col).is_not_null() & (
+        pl.col("away_team") == team)).select(pl.col(score_col).mean().round(1))
+    return mean_score.item()
+
+
+if st.button("Calculate Winner", width="stretch"):
+    st.divider()
+
+    # Perform the calculations
+    home_val = calc_home_mean(home_team, "home_score")
+    away_val = calc_away_mean(away_team, "away_score")
+
+    # Display the scores
+    col_a, col_b = st.columns(2)
+    col_a.metric(f"{home_team} Avg", home_val)
+    col_b.metric(f"{away_team} Avg", away_val)
+
+    # The Result
+    if home_val > away_val:
+        st.success(
+            f"**{home_team}** is projected to win by {round(home_val - away_val, 1)} points!")
+    elif away_val > home_val:
+        st.success(
+            f"**{away_team}** is projected to win by {round(away_val - home_val, 1)} points!")
+    else:
+        st.info("It's a projected toss-up!")
+
+    st.divider()
 
 # Show raw data for the selected home team as requested
 st.subheader(f"{home_team} Reference Data")
