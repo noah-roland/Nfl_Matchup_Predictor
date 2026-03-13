@@ -1,0 +1,4 @@
+Prerequisites/requirements:
+streamlit
+nflreadpy
+polars
