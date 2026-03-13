@@ -44,4 +44,4 @@ st.write(f"Predicting matchup: **{away_team}** @ **{home_team}**")
 
 # Show raw data for the selected home team as requested
 st.subheader(f"{home_team} Reference Data")
-st.write(teams[teams['team_abbr'] == home_team])
+st.write(teams.filter(pl.col('team_abbr') == home_team))
