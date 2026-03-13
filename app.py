@@ -77,6 +77,9 @@ if st.button("Calculate Winner", width="stretch"):
 
     st.divider()
 
-# Show raw data for the selected home team as requested
+# Show raw data for the teams
 st.subheader(f"{home_team} Reference Data")
 st.write(teams.filter(pl.col('team_abbr') == home_team))
+st.divider()
+st.subheader(f"{away_team} Reference Data")
+st.write(teams.filter(pl.col('team_abbr') == away_team))
