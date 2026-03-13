@@ -1,8 +1,6 @@
 import streamlit as st
 import nflreadpy as nfl
 import polars as pl
-import pandas as pd
-import numpy as np
 
 st.set_page_config(page_title="NFL Matchup Precictor",)
 
